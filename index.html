@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chichi Barba - Traditional Filipino Healing & Wellness</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5a3d;
+            --secondary: #8b9d77;
+            --accent: #d4a574;
+            --light: #f5f3ed;
+            --text: #2c2c2c;
+            --text-light: #6b6b6b;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text);
+            line-height: 1.8;
+            background: var(--light);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .nav a:hover {
+            opacity: 1;
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5% 4rem;
+            text-align: center;
+        }
+
+        .hero-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .hero-attribution {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .about-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .book-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .book-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .chat-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 1000;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.3);
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 5rem;
+            right: 2rem;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .chat-header h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .chat-header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 0.2rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: var(--light);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message.bot {
+            flex-direction: row;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-content {
+            max-width: 75%;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            color: var(--text);
+        }
+
+        .message.user .message-content {
+            background: var(--primary);
+            color: white;
+        }
+
+        .chat-input-container {
+            padding: 1rem 1.5rem;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+        }
+
+        .send-button {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .send-button:hover {
+            background: var(--secondary);
+        }
+
+        .footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-quote {
+                font-size: 1.2rem;
+            }
+
+            .nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .chat-window {
+                width: calc(100% - 2rem);
+                right: 1rem;
+                left: 1rem;
+            }
+
+            .about-content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">CHICHI BARBA</div>
+            <nav class="nav">
+                <a href="#about">About</a>
+                <a href="#books">Books</a>
+                <a href="#connect">Connect</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-quote">
+            "Food, a topic we are so passionate about, can be your friend. It can help you on your journey to better health. It can heal you. And it can make you happy."
+        </div>
+        <div class="hero-attribution">– Chichi Barba</div>
+        <h1 class="hero-title">Discovering Health in Your Own Kitchen</h1>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">Traditional Filipino Healing & Wellness</h2>
+        <div class="about-content">
+            <p>Chichi Barba is a traditional Filipino healing advocate specializing in traditional Filipino healing and nutritional wellness. She guides individuals toward simple, sustainable lifestyle changes through the healing power of food.</p>
+            
+            <p>As an author of multiple books on food and wellness, Chichi shares simple Filipino health practices that can help fight illnesses and promote better health. Her work bridges ancient wisdom with modern wellness, making traditional healing accessible to everyone.</p>
+            
+            <p>She is a SHEM (Self-Health Empowerment Movement) practitioner and occasionally joins Dr. Romy Paredes in supporting individuals ready to embark on their own healing and transformation. She also volunteers with NGOs advocating for sustainable agriculture and food sovereignty.</p>
+            
+            <p>Chichi has trained under renowned Filipino albularyo Bibiano Fajardo, PhD (AM) in Traditional Filipino Healing through the Association of Traditional Health Aid Givers, Inc. (ATHAG Inc.). She is also a certified Neuro-Linguistic Programming Master Practitioner through the Lead More Development Center under Jojo Apolo.</p>
+            
+            <p>Living in Manila, Philippines, Chichi maintains a career in IT, freelances as a writer, and cares for her family. In her free time, she enjoys exploring local markets for native ingredients and promoting food sovereignty.</p>
+        </div>
+    </section>
+
+    <section id="books" class="section">
+        <h2 class="section-title">Books & Publications</h2>
+        <div class="books-grid">
+            <div class="book-card">
+                <h3 class="book-title">The Everyday Plate</h3>
+                <p class="book-description">A comprehensive guide to health and diet, exploring how everyday food choices can transform your wellbeing through traditional Filipino wisdom.</p>
+            </div>
+            <div class="book-card">
+                <h3 class="book-title">What Will I Eat?</h3>
+                <p class="book-description">A personal chronicle of Chichi's health journey and the profound insights she gained about food, healing, and transformation.</p>
+            </div>
+            <div class="book-card">
+                <h3 class="book-title">Eat Well, Get Well</h3>
+                <p class="book-description">Find out how ordinary food can heal you. A practical guide to using everyday ingredients for better health.</p>
+            </div>
+            <div class="book-card">
+                <h3 class="book-title">When Food Bites</h3>
+                <p class="book-description">Co-authored with agroentrepreneur Rudy Mallari, exploring the complex relationship between food, health, and sustainable agriculture.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section">
+        <div class="section">
+            <h2 class="section-title">What People Are Saying</h2>
+            <p class="section-subtitle">Stories of healing and transformation</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Chichi's approach to traditional Filipino healing opened my eyes to the power of our own native foods. Her workshop was life-changing. I've completely transformed my relationship with food and health."</p>
+                    <div class="testimonial-author">Maria S.</div>
+                    <div class="testimonial-role">Wellness Advocate, Manila</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The SHEM training with Chichi gave me tools to take control of my own health journey. Her deep knowledge of traditional practices combined with modern understanding is truly remarkable."</p>
+                    <div class="testimonial-author">Berto C.</div>
+                    <div class="testimonial-role">SHEM Practitioner, Binan City</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"'Eat Well, Get Well' changed how I cook for myself. Chichi's wisdom about ordinary food being our medicine resonates so deeply. Simple, practical, and rooted in our culture."</p>
+                    <div class="testimonial-author">Geli M.</div>
+                    <div class="testimonial-role">Home Cook & Events Manager, QC</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="section">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's start a conversation about your healing journey</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>chichibarba@outlook.com<br>For inquiries about workshops, books, and consultations</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>Manila, Philippines<br>Available for speaking engagements and workshops nationwide</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div class="contact-details">
+                            <h3>Connect With Me</h3>
+                            <p>Follow my journey and get daily insights on traditional healing and wellness</p>
+                            <div class="social-links">
+                                <a href="https://chichibarba.carrd.co/" class="social-link" title="My social links" aria-label="eCarrd">f</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <h2 class="newsletter-title">🌿 Join Our Wellness Community</h2>
+            <p class="newsletter-description">Get monthly insights on traditional Filipino healing, recipes, and upcoming workshops delivered to your inbox.</p>
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="connect" class="cta-section">
+        <h2 class="cta-title">Start Your Healing Journey</h2>
+        <p class="cta-text">Have questions about traditional Filipino healing, food as medicine, or sustainable wellness practices? Chat with our AI wellness concierge for guidance and information.</p>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Chichi Barba. All rights reserved. | Traditional Filipino Healing & Wellness Advocate</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Manila, Philippines</p>
+    </footer>
+
+    <button class="chat-button" onclick="toggleChat()" aria-label="Open chat">💬</button>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h3>Wellness Concierge</h3>
+            <p>Ask me about food, health & Filipino healing</p>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                <div class="message-content">
+                    Hello! I'm here to help with questions about traditional Filipino healing, nutritional wellness, and Chichi Barba's work. What would you like to know?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ask about food & wellness..." onkeypress="handleKeyPress(event)">
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active');
+            if (chatWindow.classList.contains('active')) {
+                document.getElementById('chatInput').focus();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessage(content, isUser) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.textContent = content;
+            
+            messageDiv.appendChild(messageContent);
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addMessage(message, true);
+            input.value = '';
+            
+            // Add typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerHTML = '<div class="message-content">Typing...</div>';
+            document.getElementById('chatMessages').appendChild(typingDiv);
+            
+            try {
+                // Using a free alternative: HuggingFace Inference API
+                // Note: You'll need to replace this with your preferred free AI service
+                // Options: Cohere free tier, HuggingFace, or local LLM
+                
+                const response = await getBotResponse(message);
+                
+                // Remove typing indicator
+                document.getElementById('typing-indicator')?.remove();
+                
+                addMessage(response, false);
+            } catch (error) {
+                document.getElementById('typing-indicator')?.remove();
+                addMessage('I apologize, but I\'m having trouble connecting right now. Please try again later or contact Chichi directly through her social media channels.', false);
+            }
+        }
+
+        async function getBotResponse(userMessage) {
+            // This is a simple rule-based chatbot for demo purposes
+            // For a real implementation, you would integrate with a free AI API like:
+            // - Cohere (free tier)
+            // - HuggingFace Inference API (free)
+            // - Or self-hosted open-source models
+            
+            const context = `You are a helpful wellness concierge for Chichi Barba, a traditional Filipino healing advocate. 
+            Chichi specializes in traditional Filipino healing and nutritional wellness. She has written books including:
+            - The Everyday Plate (health and diet)
+            - What Will I Eat? (personal health journey)
+            - Eat Well, Get Well (how ordinary food can heal)
+            - When Food Bites (co-authored with Rudy Mallari)
+            
+            She is a SHEM practitioner, trained in traditional Filipino healing under Bibiano Fajardo, and is also an NLP Master Practitioner.
+            She lives in Manila, Philippines and advocates for sustainable agriculture and food sovereignty.`;
+            
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Simple keyword-based responses
+            if (lowerMessage.includes('book') || lowerMessage.includes('read')) {
+                return 'Chichi has written several books including "The Everyday Plate" on health and diet, "What Will I Eat?" about her personal health journey, "Eat Well, Get Well" about food healing, and "When Food Bites" co-authored with Rudy Mallari. Which topic interests you most?';
+            }
+            
+            if (lowerMessage.includes('filipino') || lowerMessage.includes('traditional')) {
+                return 'Traditional Filipino healing combines ancestral wisdom with natural remedies and food as medicine. Chichi trained under renowned albularyo Bibiano Fajardo. These practices focus on holistic wellness using local, native ingredients. Would you like to know more about specific practices?';
+            }
+            
+            if (lowerMessage.includes('food') || lowerMessage.includes('diet') || lowerMessage.includes('nutrition')) {
+                return 'Chichi believes food can be your friend on your journey to better health. She specializes in showing how ordinary food can heal you. Her approach emphasizes simple, sustainable lifestyle changes using traditional Filipino wisdom. What aspect of food and healing interests you?';
+            }
+            
+            if (lowerMessage.includes('contact') || lowerMessage.includes('reach') || lowerMessage.includes('connect')) {
+                return 'You can connect with Chichi through her newsletters, podcasts, and occasional speaking engagements. She also works with Dr. Romy Paredes in supporting individuals on their healing journeys. Check back on this site for upcoming events and ways to connect!';
+            }
+            
+            if (lowerMessage.includes('shem') || lowerMessage.includes('empowerment')) {
+                return 'SHEM stands for Self-Health Empowerment Movement. As a SHEM practitioner, Chichi helps individuals take control of their own health through education, traditional practices, and sustainable lifestyle changes. The focus is on empowering you to heal yourself.';
+            }
+            
+            return 'That\'s a great question! While I can share general information about Chichi\'s work in traditional Filipino healing, food as medicine, and her books, I recommend exploring her publications for in-depth guidance. Is there a specific topic you\'d like to know more about?';
+        }
+    </script>
+</body>
+</html>
